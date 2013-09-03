@@ -1,0 +1,52 @@
+
+def localhost = server {
+    url = "http://localhost:8080"
+    username = "operator1"
+    password = "operator1"
+}
+
+def grid = server {
+	url = "http://grid.anc.org:8080"
+	username = "suderman"
+	password = "lapplander"
+}
+
+def host = grid
+
+def masc = dataSource {
+    server = host
+    name = "lapps:MASC_TEXT_SOURCE"
+}
+
+def splitter = service {
+    server = host
+    name = "lapps:GATE_SPLITTER"
+}
+
+def tokenizer = service {
+    server = host
+    name = "lapps:GATE_TOKENIZER"
+}
+
+def tagger = service {
+    server = host
+    name = "lapps:GATE_TAGGER"
+}
+
+def pipe = pipeline {
+    dataSource(masc)
+    destination("/tmp/gate")
+    add(splitter)
+    add(tokenizer)
+    add(tagger)
+}
+
+//if (!pipe.validate())
+//{
+//	println "Invalid pipeline."
+//	return
+//}
+pipe.run()
+
+println "Done."
+

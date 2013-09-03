@@ -1,0 +1,25 @@
+// Runs the MASC data through the Stanford POS tagger.
+
+def localhost = server {
+    url = "http://localhost:8080"
+    username = "operator1"
+    password = "operator1"
+}
+
+def tagger = service {
+    server = localhost
+    name = "lapps:STANFORD_TAGGER"
+}
+
+def masc = dataSource {
+    server = localhost
+    name = "lapps:MASC_TEXT"
+}
+
+def app = pipeline {
+    destination("/tmp/stanford")
+    data(masc)
+    add(tagger)
+}
+
+app.run()

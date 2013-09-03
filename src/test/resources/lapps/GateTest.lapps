@@ -1,0 +1,107 @@
+void print(String name, service) {
+	println "${name} requires:"
+	service.requires().each { long type ->
+		String s = DiscriminatorRegistry.get(type)
+		println "   ${s} (${type})"
+	}
+	println "${name} produces:"
+	service.produces().each { long type ->
+		String s = DiscriminatorRegistry.get(type)
+		println "   ${s} (${type})"
+	}
+	println ""
+}
+
+def localhost = server {
+    url = "http://localhost:8080"
+    username = "operator1"
+    password = "operator1"
+}
+
+def masc = dataSource {
+	server = localhost
+	name = "lapps:MASC_TEXT"	
+}
+
+String base = "http://localhost:8080/GateServices/services"
+String tokenizer_url = "${base}/Tokenizer"
+String splitter_url = "${base}/SentenceSplitter"
+String tagger_url = "${base}/POSTagger"
+
+String user = "operator1"
+String password = "operator1"
+
+def splitter = new RemoteService(splitter_url, user, password)
+def tokenizer = new RemoteService(tokenizer_url, user, password)
+def tagger = new RemoteService(tagger_url, user, password)
+//print "Splitter", splitter
+//print "Tokenizer", tokenizer
+//print "Tagger", tagger
+//return
+
+Pipeline pipeline = new Pipeline()
+pipeline.add(splitter)
+pipeline.add(tokenizer)
+pipeline.add(tagger)
+if (!pipeline.validate())
+{
+	println "Invalid pipeline."
+	return;
+}
+
+File destination = new File("/tmp/gate")
+masc.list().each { key ->
+	println "Processing ${key}"
+	Data data = masc.get(key)
+	data = pipeline.execute(data)
+	if (data.discriminator != Types.ERROR) {
+		File output = new File(destination, key + ".xml")
+		output.setText(data.payload, "UTF-8")
+	}
+	else {
+		println "ERROR: ${data.payload}"
+	}
+}
+
+/*
+def keys = masc.list()
+
+println "Getting a document."
+Data data = masc.get(keys[0])
+
+if (data.discriminator == Types.ERROR) {
+	println "ERROR : ${data.payload}"
+	return
+}
+
+println "Document content:"
+println data.payload
+
+println "Running the sentence splitter."
+data = splitter.execute(data)
+if (data.discriminator == Types.ERROR) {
+	println "ERROR : ${data.payload}"
+	return
+}
+
+data = tokenizer.execute(data)
+if (data.discriminator == Types.ERROR) {
+	println "ERROR : ${data.payload}"
+	return
+}
+
+data = tagger.execute(data)
+if (data.discriminator == Types.ERROR) {
+	println "ERROR : ${data.payload}"
+	return
+}
+
+println data.payload
+
+long type = data.discriminator
+String name = DiscriminatorRegistry.get(type)
+println "Returned type is ${name} (${type})"
+println data.payload
+*/
+println "Done."
+

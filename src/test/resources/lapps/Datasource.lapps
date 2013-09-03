@@ -1,0 +1,28 @@
+// Testing DataSource objects
+
+def grid = server {
+    url = "http://grid.anc.org:8080"
+    username = "suderman"
+    password = "lapplander"
+}
+
+def localhost = server {
+    url = "http://localhost:8080"
+    username = "operator1"
+    password = "operator1"
+}
+
+def masc = dataSource {
+    server = localhost
+    name = "lapps:MASC_TEXT"
+}
+
+def list  = masc.list()
+list.each { println it }
+//return
+
+Data docData = masc.get(list[0])
+long type = docData.discriminator
+String name = DiscriminatorRegistry.get(type)
+println "Document type : ${name} (${type})"
+println docData.payload

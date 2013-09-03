@@ -1,0 +1,14 @@
+println "Configuring servers."
+
+def localhost = server {
+    url = "http://localhost:8080"
+    username = "operator1"
+    password = "operator1"
+}
+
+def grid = server {
+    url = "http://grid.anc.org:8080"
+    username = "suderman"
+    password = "lapplander"
+}
+

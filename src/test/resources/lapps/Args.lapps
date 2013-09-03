@@ -1,0 +1,2 @@
+println "Args are: "
+args.each { println it }

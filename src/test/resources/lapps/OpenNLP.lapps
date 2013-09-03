@@ -1,0 +1,59 @@
+println "Running Services.lapps"
+
+/*
+ * Server definitions.
+ */
+def grid = server {
+    url = "http://grid.anc.org:8080"
+    username = "suderman"
+    password = "lapplander"
+}
+
+def localhost = server {
+    url = "http://localhost:8080"
+    username = "operator1"
+    password = "operator1"
+}
+
+/*
+ * MASC 3.0.0 data source for text files.
+ */
+def masc = dataSource {
+    server = localhost
+    name = "lapps:MASC_TEXT"
+}
+
+/*
+ * Processing services.
+ */
+def splitter = service {
+    server = localhost
+    name = "lapps:OPENNLP_SPLITTER"
+}
+
+def tokenizer = service {
+    server = localhost
+    name = "lapps:OPENNLP_TOKENIZER"
+}
+
+def tagger = service {
+    server = localhost
+    name = "lapps:OPENNLP_TAGGER"
+}
+
+/*
+ * The pipeline.
+ */
+def openNLP = pipeline {
+    destination("/tmp/opennlp")
+    dataSource(masc)
+    add(splitter)
+    add(tokenizer)
+    add(tagger)
+}
+
+
+// Run the pipeline.
+openNLP.run()
+
+println "Done."
