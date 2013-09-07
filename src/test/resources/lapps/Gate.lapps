@@ -11,11 +11,16 @@ def grid = server {
 	password = "lapplander"
 }
 
-def host = grid
+def host = localhost 
 
 def masc = dataSource {
     server = host
-    name = "lapps:MASC_TEXT_SOURCE"
+    if (host == localhost) {
+	    name = "lapps:MASC_TEXT"
+    }
+    else {
+    	name = "lapps:MASC_TEXT_SOURCE"
+    }
 }
 
 def splitter = service {

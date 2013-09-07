@@ -49,6 +49,7 @@ class LappsDsl {
         def includes = []
         def included = [:]
         meta.include = { String fileName ->
+            //throw new UnsupportedOperationException("Include statements are not supported at this time.")
             if (included[fileName] != null) {
                 return
             }
@@ -56,21 +57,16 @@ class LappsDsl {
             if (!file.exists()) {
                 throw new FileNotFoundException(fileName)
             }
-            println "Including ${fileName}"
+            println "Including ${fileName} from ${file.path}"
 
-//            script.evaluate(file.text)
-            def includedScript = shell.parse(file)
-//            println "Bindings"
-//            script.binding.variables.each { k,v ->
-//                println "${k} = ${v}"
-//            }
-//            println "Methods"
-//            delegate.metaClass.methods { MetaMethod method ->
-//                println method.name
-//            }
-            includedScript.binding = script.binding
-            includedScript.metaClass = delegate.metaClass
-            includedScript.run()
+
+            script.evaluate(file.text)
+//            shell.evaluate(file.text, 'Servers')
+//            def includedScript = shell.parse(file)
+//            includedScript.run(file, null)
+//            includedScript.binding = script.binding
+//            includedScript.metaClass = delegate.metaClass
+//            includedScript.run()
             included[fileName] = true
         }
 

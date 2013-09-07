@@ -6,20 +6,42 @@ def localhost = server {
     password = "operator1"
 }
 
-def tagger = service {
+def splitter = service {
     server = localhost
-    name = "lapps:STANFORD_TAGGER"
+    name = "lapps:STANFORD_SPLITTER"
 }
 
+/*
+def tokenizer = service {
+	server = localhost
+	name = "lapps:STANFORD_TOKENIZER"
+}
+*/
+
+def tokenizer = new RemoteService("http://grid.anc.org:8080/service_manager/invoker/anc:STANFORD_TOKENIZER", "operator", "operator")
 def masc = dataSource {
     server = localhost
     name = "lapps:MASC_TEXT"
 }
 
+def keys = masc.list()[0..9]
+keys.each { key ->
+	def text = masc.get(key)
+	//def data = DataFactory.text(text)
+	def data = tokenizer.execute(text);
+	println key
+	println data.payload
+	println ""
+}
+
+/*
 def app = pipeline {
     destination("/tmp/stanford")
-    data(masc)
-    add(tagger)
+    dataSource(masc)
+    add(splitter)
 }
 
 app.run()
+*/
+
+println "Done"

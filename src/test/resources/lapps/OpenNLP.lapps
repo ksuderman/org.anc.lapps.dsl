@@ -5,8 +5,8 @@ println "Running Services.lapps"
  */
 def grid = server {
     url = "http://grid.anc.org:8080"
-    username = "suderman"
-    password = "lapplander"
+    username = "operator"
+    password = "operator"
 }
 
 def localhost = server {
@@ -18,27 +18,34 @@ def localhost = server {
 /*
  * MASC 3.0.0 data source for text files.
  */
-def masc = dataSource {
+def local_masc = dataSource {
     server = localhost
     name = "lapps:MASC_TEXT"
 }
+
+def grid_masc = dataSource {
+	server = grid
+	name = "anc:MASC_TEXT"
+}
+
+def host = grid
 
 /*
  * Processing services.
  */
 def splitter = service {
-    server = localhost
-    name = "lapps:OPENNLP_SPLITTER"
+    server = grid
+    name = "anc:OPENNLP_SPLITTER"
 }
 
 def tokenizer = service {
-    server = localhost
-    name = "lapps:OPENNLP_TOKENIZER"
+    server = grid
+    name = "anc:OPENNLP_TOKENIZER"
 }
 
 def tagger = service {
-    server = localhost
-    name = "lapps:OPENNLP_TAGGER"
+    server = grid
+    name = "anc:OPENNLP_TAGGER"
 }
 
 /*
