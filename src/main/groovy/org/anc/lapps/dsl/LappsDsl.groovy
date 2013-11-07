@@ -1,6 +1,7 @@
 package org.anc.lapps.dsl
 
 import org.anc.grid.data.masc.client.DataSourceClient
+import org.anc.lapps.client.RemoteService
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ImportCustomizer
 
@@ -92,7 +93,11 @@ class LappsDsl {
             cl.delegate = new ServiceDelegate()
             cl.resolveStrategy = Closure.DELEGATE_FIRST
             cl()
-            return new Service(cl.delegate)
+            def service = new Service(cl.delegate)
+            def url = service.getServiceUrl();
+            def user = service.server.username
+            def pass = service.server.password
+            return new RemoteService(url, user, pass)
         }
 
         meta.pipeline = { Closure cl ->

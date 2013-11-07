@@ -18,11 +18,26 @@ def localhost = server {
     password = "operator1"
 }
 
+def grid = server {
+	url = "http://grid.anc.org:8080"
+	username = "operator"
+	password = "operator"
+}
+
 def masc = dataSource {
 	server = localhost
 	name = "lapps:MASC_TEXT"	
 }
 
+def tokenizer = service {
+	server = grid
+	name = 'anc:GATE_TOKENIZER'
+}
+
+print ('Gate Tokenizer', tokenizer)
+return
+
+/*
 String base = "http://localhost:8080/GateServices/services"
 String tokenizer_url = "${base}/Tokenizer"
 String splitter_url = "${base}/SentenceSplitter"
@@ -34,6 +49,7 @@ String password = "operator1"
 def splitter = new RemoteService(splitter_url, user, password)
 def tokenizer = new RemoteService(tokenizer_url, user, password)
 def tagger = new RemoteService(tagger_url, user, password)
+*/
 //print "Splitter", splitter
 //print "Tokenizer", tokenizer
 //print "Tagger", tagger

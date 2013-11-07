@@ -1,33 +1,36 @@
 package org.anc.lapps.dsl
 
 import org.anc.lapps.client.RemoteService
+import org.anc.lapps.pipeline.Pipeline
 import org.lappsgrid.api.Data
 import org.lappsgrid.api.DataSource
 import org.lappsgrid.core.DataFactory
+import org.lappsgrid.discriminator.DiscriminatorRegistry
 import org.lappsgrid.discriminator.Types
 
 /**
  * @author Keith Suderman
  */
 class PipelineDelegate {
-    def services = []
+//    def services = []
     DataSource datasource
-//    Pipeline pipeline = new Pipeline()
+    Pipeline pipeline = new Pipeline()
     def destination
 
-    void add(Service service) {
+    void add(RemoteService service) {
         //services << service
-        def url = service.getServiceUrl();
-        def user = service.server.username
-        def password = service.server.password
+//        def url = service.getServiceUrl();
+//        def user = service.server.username
+//        def password = service.server.password
 //        pipeline.add(new RemoteService(url, user, password))
-        services << new RemoteService(url, user, password)
+//        services << new RemoteService(url, user, password)
+        pipeline.add(service)
     }
 
     boolean validate()
     {
-//        return pipeline.validate()
-        return false;
+        return pipeline.validate()
+//        return false;
     }
 
     void run() {
@@ -56,23 +59,23 @@ class PipelineDelegate {
             else
             {
                 boolean save = true
-                services.each { service ->
-                    println "Running service ${service.getEndpoint()}"
-                    data = service.execute(data)
-                    if (data.discriminator == Types.ERROR) {
-                        println "ERROR: Processing ${key} : ${data.payload}"
-                        save = false
-                        return
-                    }
-                }
-//                data = pipeline.execute(data);
-//                if (data.payload == null) {
-//                    println "ERROR: data.payload is NULL!"
-//                    String name = DiscriminatorRegistry.get(data.discriminator);
-//                    println "Return type is ${name} (${data.discriminator})"
+//                services.each { service ->
+//                    println "Running service ${service.getEndpoint()}"
+//                    data = service.execute(data)
+//                    if (data.discriminator == Types.ERROR) {
+//                        println "ERROR: Processing ${key} : ${data.payload}"
+//                        save = false
+//                        return
+//                    }
 //                }
-//                else if (save) {
-                if (save) {
+                data = pipeline.execute(data);
+                if (data.payload == null) {
+                    println "ERROR: data.payload is NULL!"
+                    String name = DiscriminatorRegistry.get(data.discriminator);
+                    println "Return type is ${name} (${data.discriminator})"
+                }
+                else if (save) {
+//                if (save) {
                     File file = new File(destination, key)
                     println "Writing ${file.path}"
                     file.setText(data.payload, "UTF-8")

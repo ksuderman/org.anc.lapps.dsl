@@ -48,12 +48,32 @@ def tagger = service {
     name = "anc:OPENNLP_TAGGER"
 }
 
+def keys = grid_masc.list()
+def data = grid_masc.get(keys[0])
+
+/*
+println "Running the OpenNLP sentence splitter."
+def sentences = splitter.execute(data)
+println sentences.payload
+
+println "Running the OpenNLP tokenizer."
+def tokens = tokenizer.execute(data)
+println tokens.payload
+*/
+
+println "Running the OpenNLP tagger."
+//data.discriminator = Types.OPENNLP
+data = tokenizer.execute(data)
+def tags = tagger.execute(data)
+println tags.payload
+
 /*
  * The pipeline.
  */
+ /*
 def openNLP = pipeline {
     destination("/tmp/opennlp")
-    dataSource(masc)
+    dataSource(grid_masc)
     add(splitter)
     add(tokenizer)
     add(tagger)
@@ -62,5 +82,5 @@ def openNLP = pipeline {
 
 // Run the pipeline.
 openNLP.run()
-
+*/
 println "Done."
