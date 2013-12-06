@@ -10,4 +10,12 @@ class DataSourceDelegate {
     String getServiceUrl() {
         return "${server.url}/service_manager/invoker/${name}"
     }
+
+    void server(Server server) {
+        this.server = server
+    }
+
+    void name(String name) {
+        this.name = name
+    }
 }

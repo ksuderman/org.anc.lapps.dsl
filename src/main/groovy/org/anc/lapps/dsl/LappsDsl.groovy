@@ -12,7 +12,12 @@ class LappsDsl {
 //    def servers = [:]
 //    def services = [:]
 
+    Set<String> included = new HashSet<String>()
+    File parentDir
+    Binding bindings = new Binding()
+
     void run(File file, args) {
+        parentDir = file.parentFile
         run(file.text, args)
     }
 
@@ -39,39 +44,62 @@ class LappsDsl {
 
         CompilerConfiguration configuration = new CompilerConfiguration()
         configuration.addCompilationCustomizers(customizer)
-        Binding bindings = new Binding()
+//        Binding bindings = new Binding()
         GroovyShell shell = new GroovyShell(loader, bindings, configuration)
 
         Script script = shell.parse(scriptString)
         if (args != null && args.size() > 0) {
             script.binding.setVariable("args", args)
         }
-        ExpandoMetaClass meta = new ExpandoMetaClass(script.class, false)
-        def includes = []
-        def included = [:]
-        meta.include = { String fileName ->
-            //throw new UnsupportedOperationException("Include statements are not supported at this time.")
-            if (included[fileName] != null) {
-                return
-            }
-            File file = new File(fileName)
-            if (!file.exists()) {
-                throw new FileNotFoundException(fileName)
-            }
-            println "Including ${fileName} from ${file.path}"
-
-
-            script.evaluate(file.text)
-//            shell.evaluate(file.text, 'Servers')
-//            def includedScript = shell.parse(file)
-//            includedScript.run(file, null)
-//            includedScript.binding = script.binding
-//            includedScript.metaClass = delegate.metaClass
-//            includedScript.run()
-            included[fileName] = true
+        else {
+            script.binding.setVariable("args", [])
         }
 
-        meta.dataSource = { Closure cl ->
+        println "Running main."
+        script.metaClass = getMetaClass(script.class, shell)
+        script.run()
+    }
+
+    MetaClass getMetaClass(Class<?> theClass, GroovyShell shell) {
+        ExpandoMetaClass meta = new ExpandoMetaClass(theClass, false)
+        meta.include = { String filename ->
+            // Make sure we can find the file. The default behaviour is to
+            // look in the same directory as the source script.
+            // TODO Allow an absolute path to be specified.
+
+            def filemaker
+            if (parentDir != null) {
+                filemaker = { String name ->
+                    return new File(parentDir, name)
+                }
+            }
+            else {
+                filemaker = { String name ->
+                    new File(name)
+                }
+            }
+
+            File file = filemaker(filename)
+            if (!file.exists()) {
+                file = filemaker(filename + ".lapps")
+                if (!file.exists()) {
+                    throw new FileNotFoundException(filename)
+                }
+            }
+            // Don't include the same file multiple times.
+            if (included.contains(filename)) {
+                return
+            }
+            included.add(filename)
+
+
+            // Parse and run the script.
+            Script included = shell.parse(file)
+            included.metaClass = getMetaClass(included.class, shell)
+            included.run()
+        }
+
+        meta.Datasource = { Closure cl ->
             cl.delegate = new DataSourceDelegate()
             cl.resolveStrategy = Closure.DELEGATE_FIRST
             cl()
@@ -79,17 +107,16 @@ class LappsDsl {
             String user = cl.delegate.server.username
             String pass = cl.delegate.server.password
             return new DataSourceClient(url, user, pass)
-//            return cl.delegate
         }
 
-        meta.server = { Closure cl ->
+        meta.Server = { Closure cl ->
             cl.delegate = new ServerDelegate()
             cl.resolveStrategy = Closure.DELEGATE_FIRST
             cl()
             return new Server(cl.delegate)
         }
 
-        meta.service = { Closure cl ->
+        meta.Service = { Closure cl ->
             cl.delegate = new ServiceDelegate()
             cl.resolveStrategy = Closure.DELEGATE_FIRST
             cl()
@@ -100,7 +127,7 @@ class LappsDsl {
             return new RemoteService(url, user, pass)
         }
 
-        meta.pipeline = { Closure cl ->
+        meta.Pipeline = { Closure cl ->
             cl.delegate = new PipelineDelegate()
             cl.resolveStrategy = Closure.DELEGATE_FIRST
             cl()
@@ -108,9 +135,7 @@ class LappsDsl {
         }
 
         meta.initialize()
-        println "Running main."
-        script.metaClass = meta
-        script.run()
+        return meta
     }
 
     static void main(args) {

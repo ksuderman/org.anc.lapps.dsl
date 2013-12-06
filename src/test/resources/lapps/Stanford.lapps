@@ -1,47 +1,16 @@
-// Runs the MASC data through the Stanford POS tagger.
-
-def localhost = server {
-    url = "http://localhost:8080"
-    username = "operator1"
-    password = "operator1"
-}
-
-def splitter = service {
-    server = localhost
-    name = "lapps:STANFORD_SPLITTER"
-}
-
 /*
-def tokenizer = service {
-	server = localhost
-	name = "lapps:STANFORD_TOKENIZER"
-}
-*/
+ * Stanford processing services.
+ */
+include 'Datasources'
+include 'StanfordServices'
 
-def tokenizer = new RemoteService("http://grid.anc.org:8080/service_manager/invoker/anc:STANFORD_TOKENIZER", "operator", "operator")
-def masc = dataSource {
-    server = localhost
-    name = "lapps:MASC_TEXT"
-}
-
-def keys = masc.list()[0..9]
-keys.each { key ->
-	def text = masc.get(key)
-	//def data = DataFactory.text(text)
-	def data = tokenizer.execute(text);
-	println key
-	println data.payload
-	println ""
+pipe = Pipeline {
+    destination "/tmp/stanford"
+    datasource masc.raw.text
+    extension "txt"
+    add stanford.splitter
+    add stanford.tokenizer
+    add stanford.tagger
 }
 
-/*
-def app = pipeline {
-    destination("/tmp/stanford")
-    dataSource(masc)
-    add(splitter)
-}
-
-app.run()
-*/
-
-println "Done"
+pipe.run()

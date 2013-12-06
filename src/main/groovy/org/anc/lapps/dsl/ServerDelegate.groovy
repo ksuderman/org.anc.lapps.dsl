@@ -15,4 +15,16 @@ class ServerDelegate {
     def propertyMissing(String name) {
         throw new MissingPropertyException("Unknown property ${name}")
     }
+
+    void url(String url) {
+        this.url = url
+    }
+
+    void username(String username) {
+        this.username = username
+    }
+
+    void password(String password) {
+        this.password = password
+    }
 }

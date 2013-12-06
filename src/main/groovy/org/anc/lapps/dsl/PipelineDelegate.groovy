@@ -16,6 +16,7 @@ class PipelineDelegate {
     DataSource datasource
     Pipeline pipeline = new Pipeline()
     def destination
+    def extension
 
     void add(RemoteService service) {
         //services << service
@@ -33,6 +34,10 @@ class PipelineDelegate {
 //        return false;
     }
 
+    void extension(String extension) {
+        this.extension = extension
+    }
+
     void run() {
         println "Running pipeline"
         println "Destination: ${destination.path}"
@@ -43,7 +48,6 @@ class PipelineDelegate {
                 return
             }
         }
-//        DataSourceClient dataSourceClient = new DataSourceClient(datasource.getServiceUrl(), datasource.server.username, datasource.server.password)
         Data listData = datasource.query(DataFactory.list());
         if (listData.discriminator == Types.ERROR) {
             println "Datasource.list() returned an error:"
@@ -58,25 +62,21 @@ class PipelineDelegate {
             }
             else
             {
-                boolean save = true
-//                services.each { service ->
-//                    println "Running service ${service.getEndpoint()}"
-//                    data = service.execute(data)
-//                    if (data.discriminator == Types.ERROR) {
-//                        println "ERROR: Processing ${key} : ${data.payload}"
-//                        save = false
-//                        return
-//                    }
-//                }
                 data = pipeline.execute(data);
                 if (data.payload == null) {
                     println "ERROR: data.payload is NULL!"
                     String name = DiscriminatorRegistry.get(data.discriminator);
                     println "Return type is ${name} (${data.discriminator})"
                 }
-                else if (save) {
-//                if (save) {
-                    File file = new File(destination, key)
+                else if (data.discriminator == Types.ERROR) {
+                    println "ERROR: ${data.payload}"
+                }
+                else {
+                    String filename = key
+                    if (extension) {
+                        filename = "${key}.${extension}"
+                    }
+                    File file = new File(destination, filename)
                     println "Writing ${file.path}"
                     file.setText(data.payload, "UTF-8")
                 }
@@ -85,14 +85,7 @@ class PipelineDelegate {
         }
     }
 
-    void dataSource(source) {
-//        def url = source.getServiceUrl()
-//        def user = source.server.username
-//        def pass = source.server.password
-//        println "DataSource: ${url}"
-//        println "Username  : ${user}"
-//        println "Password  : ${pass}"
-//        datasource = new DataSourceClient(url, user, pass)
+    void datasource(source) {
         datasource = source
     }
 

@@ -6,4 +6,12 @@ package org.anc.lapps.dsl
 class ServiceDelegate {
     Server server
     String name
+
+    void server(Server server) {
+        this.server = server
+    }
+
+    void name(String name) {
+        this.name = name
+    }
 }

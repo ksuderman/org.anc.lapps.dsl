@@ -1,86 +1,12 @@
 println "Running Services.lapps"
 
-/*
- * Server definitions.
- */
-def grid = server {
-    url = "http://grid.anc.org:8080"
-    username = "operator"
-    password = "operator"
+include 'OpenNlpServices'
+
+def openNLP = Pipeline {
+    destination "/tmp/opennlp"
+    datasource masc.raw.text
+    add splitter
+    add tokenizer
+    add tagger
 }
-
-def localhost = server {
-    url = "http://localhost:8080"
-    username = "operator1"
-    password = "operator1"
-}
-
-/*
- * MASC 3.0.0 data source for text files.
- */
-def local_masc = dataSource {
-    server = localhost
-    name = "lapps:MASC_TEXT"
-}
-
-def grid_masc = dataSource {
-	server = grid
-	name = "anc:MASC_TEXT"
-}
-
-def host = grid
-
-/*
- * Processing services.
- */
-def splitter = service {
-    server = grid
-    name = "anc:OPENNLP_SPLITTER"
-}
-
-def tokenizer = service {
-    server = grid
-    name = "anc:OPENNLP_TOKENIZER"
-}
-
-def tagger = service {
-    server = grid
-    name = "anc:OPENNLP_TAGGER"
-}
-
-def keys = grid_masc.list()
-def data = grid_masc.get(keys[0])
-
-/*
-println "Running the OpenNLP sentence splitter."
-def sentences = splitter.execute(data)
-println sentences.payload
-
-println "Running the OpenNLP tokenizer."
-def tokens = tokenizer.execute(data)
-println tokens.payload
-*/
-
-println "Running the OpenNLP tagger."
-//data.discriminator = Types.OPENNLP
-data = tokenizer.execute(data)
-def tags = tagger.execute(data)
-println tags.payload
-
-/*
- * The pipeline.
- */
- /*
-def openNLP = pipeline {
-    destination("/tmp/opennlp")
-    dataSource(grid_masc)
-    add(splitter)
-    add(tokenizer)
-    add(tagger)
-}
-
-
-// Run the pipeline.
 openNLP.run()
-*/
-println "Done."

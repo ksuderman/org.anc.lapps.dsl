@@ -1,0 +1,23 @@
+include 'Servers'
+
+/*
+ * OpenNLP processing services.
+ */
+
+println "Initializing OpenNLP services."
+opennlp = [:]
+
+opennlp.splitter = Service {
+    server = servers.localhost
+    name = "lapps:opennlp.splitter"
+}
+
+opennlp.tokenizer = Service {
+    server = servers.localhost
+    name = "lapps:opennlp.tokenizer"
+}
+
+opennlp.tagger = Service {
+    server = servers.anc
+    name = "lapps:opennlp.tagger"
+}

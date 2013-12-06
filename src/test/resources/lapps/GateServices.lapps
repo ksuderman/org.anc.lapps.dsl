@@ -1,0 +1,44 @@
+/*
+ * GATE processing services
+ */
+ 
+include 'Servers'
+
+println "Initializing GATE processing services."
+gate = [:]
+
+gate.splitter = Service {
+    server servers.localhost
+    name "lapps:gate.splitter"
+}
+
+gate.tokenizer = Service {
+    server servers.localhost
+    name "lapps:gate.tokenizer"
+}
+
+gate.tagger = Service {
+    server servers.localhost
+	name "lapps:gate.tagger"
+}
+
+gate.gazetteer = Service {
+	server servers.localhost
+	name "lapps:gate.gazetteer"
+}
+
+gate.ner = Service {
+	server servers.localhost
+	name "lapps:gate.ner"
+}
+
+gate.npchunker = Service {
+	server servers.localhost
+	name 'lapps:gate.npchunker'
+}
+
+gate.vpchunker = Service {
+	server servers.localhost
+	name 'lapps:gate.vpchunker'
+}
+
