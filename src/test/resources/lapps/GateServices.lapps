@@ -9,36 +9,36 @@ gate = [:]
 
 gate.splitter = Service {
     server servers.localhost
-    name "lapps:gate.splitter"
+    name "anc:gate.splitter"
 }
 
 gate.tokenizer = Service {
     server servers.localhost
-    name "lapps:gate.tokenizer"
+    name "anc:gate.tokenizer"
 }
 
 gate.tagger = Service {
     server servers.localhost
-	name "lapps:gate.tagger"
+	name "anc:gate.tagger"
 }
 
 gate.gazetteer = Service {
 	server servers.localhost
-	name "lapps:gate.gazetteer"
+	name "anc:gate.gazetteer"
 }
 
 gate.ner = Service {
 	server servers.localhost
-	name "lapps:gate.ner"
+	name "anc:gate.ner"
 }
 
 gate.npchunker = Service {
 	server servers.localhost
-	name 'lapps:gate.npchunker'
+	name 'anc:gate.npchunker'
 }
 
 gate.vpchunker = Service {
 	server servers.localhost
-	name 'lapps:gate.vpchunker'
+	name 'anc:gate.vpchunker'
 }
 

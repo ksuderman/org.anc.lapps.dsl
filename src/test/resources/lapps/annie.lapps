@@ -1,0 +1,22 @@
+include 'Datasources'
+include 'Servers'
+
+annie = Service {
+	server localhost
+	name "anc:gate.annie"
+}
+
+converter = Service {
+	server localhost
+	name 'anc:convert.gate2json'
+}
+
+application = Pipeline {
+	datasource masc.text
+	destination "/tmp/annie"
+	extension "json"
+	add annie
+	add converter
+}
+
+application.run()

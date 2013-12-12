@@ -34,6 +34,7 @@ class LappsDsl {
             'org.anc.grid.masc.data.client',
             'org.anc.lapps.client',
             'org.anc.lapps.pipeline',
+            'org.anc.lapps.serialization',
             'org.anc.io',
             'org.anc.util',
             'org.anc.xml'

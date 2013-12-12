@@ -1,0 +1,35 @@
+/*
+ * MASC 3.0.0 data sources.
+ */
+
+include 'Servers'
+
+println "Configuring MASC data sources."
+masc = [:]
+masc.raw = [:]
+masc.json = [:]
+
+/* Text files only. */
+masc.raw.text = Datasource {
+    server servers.localhost
+    name "anc:MASC_TEXT"
+}
+
+/* Text, headers, and standoff annotations. */
+masc.raw.data = Datasource {
+	server = servers.localhost
+	name = "anc:MASC_DATA"
+}
+
+/* Header files only. */
+masc.raw.headers = Datasource {
+	server = servers.localhost
+	name = "anc:MASC_HEADERS"
+}
+
+/*** JSON FORMAT ***/
+masc.json.text = Datasource {
+	server = servers.localhost
+	name = 'anc:MASC_TEXT_JSON_1.3.0'
+}
+

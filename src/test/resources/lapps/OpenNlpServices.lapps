@@ -9,15 +9,15 @@ opennlp = [:]
 
 opennlp.splitter = Service {
     server = servers.localhost
-    name = "lapps:opennlp.splitter"
+    name = "anc:opennlp.splitter"
 }
 
 opennlp.tokenizer = Service {
     server = servers.localhost
-    name = "lapps:opennlp.tokenizer"
+    name = "anc:opennlp.tokenizer"
 }
 
 opennlp.tagger = Service {
     server = servers.anc
-    name = "lapps:opennlp.tagger"
+    name = "anc:opennlp.tagger"
 }

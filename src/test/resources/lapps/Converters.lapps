@@ -1,0 +1,12 @@
+include 'Servers'
+
+convert = [:]
+convert.gate2json = Service {
+	server servers.localhost
+	name 'anc:convert.gate2json_0.1.0'
+}
+
+convert.json2gate = Service {
+	server servers.localhost
+	name 'anc:convert.json2gate_0.1.0'
+}

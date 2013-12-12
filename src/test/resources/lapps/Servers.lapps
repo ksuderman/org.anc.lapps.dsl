@@ -13,6 +13,6 @@ servers.localhost = Server {
 
 servers.anc = Server {
     url "http://grid.anc.org:8080"
-    username "operator"
-    password "operator"
+    username "test"
+    password "test"
 }

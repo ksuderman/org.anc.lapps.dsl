@@ -1,0 +1,20 @@
+import org.anc.grid.data.masc.client.DataSourceClient
+
+include 'Datasources'
+
+def ds = new DataSourceClient('http://localhost:8080/service_manager/invoker/anc:MASC_TEXT_JSON_1.3.0', 'operator', 'operator')
+String[] keys = ds.list()
+println "There are ${keys.length} keys."
+
+//int i = 0
+//keys.each { key ->
+(0..9).each { i ->
+    def key = keys[i]
+    Data query = new Data(Types.GET, key)
+    def result = ds.query(query)
+    //def result = ds.get(key)
+    def name = DiscriminatorRegistry.get(result.discriminator)
+    println "${String.format('%02d', i)}. ${key} : ${name} (${result.discriminator})"
+}
+
+println "Done"
