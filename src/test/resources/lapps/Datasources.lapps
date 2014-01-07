@@ -15,19 +15,19 @@ masc.raw.text = Datasource {
     name "anc:MASC_TEXT"
 }
 
-/* Text, headers, and standoff annotations. */
+/* Text, headers, and standoff annotations. May be text or XML. */
 masc.raw.data = Datasource {
 	server = servers.localhost
 	name = "anc:MASC_DATA"
 }
 
-/* Header files only. */
+/* Header files only. In XML. */
 masc.raw.headers = Datasource {
 	server = servers.localhost
 	name = "anc:MASC_HEADERS"
 }
 
-/*** JSON FORMAT ***/
+/* JSON Formats */
 masc.json.text = Datasource {
 	server = servers.localhost
 	name = 'anc:MASC_TEXT_JSON_1.3.0'
