@@ -1,4 +1,4 @@
-package org.anc.grate.version;
+package org.anc.lapps.dsl;
 
 /* DO NO EDIT. This file is geneated automatically by Maven. */
 /**

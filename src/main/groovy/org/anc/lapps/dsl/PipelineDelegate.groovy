@@ -1,6 +1,6 @@
 package org.anc.lapps.dsl
 
-import org.anc.lapps.client.RemoteService
+import org.lappsgrid.client.service.ServiceClient
 import org.anc.lapps.pipeline.Pipeline
 import org.lappsgrid.api.Data
 import org.lappsgrid.api.DataSource
@@ -18,7 +18,7 @@ class PipelineDelegate {
     def destination
     def extension
 
-    void add(RemoteService service) {
+    void add(ServiceClient service) {
         //services << service
 //        def url = service.getServiceUrl();
 //        def user = service.server.username

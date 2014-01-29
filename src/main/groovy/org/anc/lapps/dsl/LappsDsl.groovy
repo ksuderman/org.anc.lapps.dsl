@@ -1,7 +1,7 @@
 package org.anc.lapps.dsl
 
-import org.anc.grid.data.masc.client.DataSourceClient
-import org.anc.lapps.client.RemoteService
+import org.lappsgrid.client.datasource.DataSourceClient
+import org.lappsgrid.client.service.ServiceClient
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ImportCustomizer
 
@@ -30,9 +30,10 @@ class LappsDsl {
         def packages = [
             'org.lappsgrid.api',
             'org.lappsgrid.core',
+            'org.lappsgrid.client',
             'org.lappsgrid.discriminator',
-            'org.anc.grid.masc.data.client',
-            'org.anc.lapps.client',
+            //'org.anc.grid.masc.data.client',
+            //'org.anc.lapps.client',
             'org.anc.lapps.pipeline',
             'org.anc.lapps.serialization',
             'org.anc.io',
@@ -125,7 +126,7 @@ class LappsDsl {
             def url = service.getServiceUrl();
             def user = service.server.username
             def pass = service.server.password
-            return new RemoteService(url, user, pass)
+            return new ServiceClient(url, user, pass)
         }
 
         meta.Pipeline = { Closure cl ->
@@ -150,6 +151,13 @@ java -jar lapps.jar /path/to/script"
             return
         }
 
+        if (args[0] == '-version') {
+            println()
+            println "LAPPS Groovy DSL v${Version.version}"
+            println "Copyright 2013 American National Corpus"
+            println()
+            return
+        }
         def argv = null
         if (args.size() > 1) {
             argv = args[1..-1]

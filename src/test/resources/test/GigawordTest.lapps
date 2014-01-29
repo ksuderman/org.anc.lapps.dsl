@@ -1,0 +1,65 @@
+@Grab('org.anc.lapps.ldc:gigaword:1.0.0-SNAPSHOT')
+import org.anc.lapps.ldc.GigawordClient
+
+//include 'Gate'
+include 'OpenNLP'
+include 'Stanford'
+
+client = new GigawordClient()
+
+xml = client.get('NYT_ENG_19940701.0001')
+text = new XmlSlurper().parseText(xml).toString()
+
+result = opennlp.splitter.execute(new Data(Types.TEXT, text))
+result = opennlp.tokenizer.execute(result)
+//result = stanford.tagger.execute(result)
+//println result.payload
+
+CharacterIterator it1 = new CharacterIterator(text)
+CharacterIterator it2 = new CharacterIterator(result.payload)
+
+while (it1.hasNext() && it2.hasNext()) {
+	char c1 = it1.next()
+	char c2 = it2.next()
+	if (c1 != c2) {
+		println "Mismatched characters!"
+		return
+	}
+	else {
+		println "${it1.index}: ${c1}"
+	}
+}
+
+println()
+println "Both texts match!"
+
+class CharacterIterator {
+	String text
+	int index
+	
+	public CharacterIterator(String text) {
+		this.text = text
+		index = 0
+		skipWhitespace()
+	}
+	
+	void skipWhitespace() {
+		while (index < text.length() && Character.isWhitespace(text[index] as char)) {
+			++index
+		}
+	}
+	
+	Character next() {
+		if (index >= text.length()) {
+			return null
+		}
+		Character ch = text[index] as Character
+		++index
+		skipWhitespace()
+		return ch
+	}
+	
+	boolean hasNext() {
+		return index < text.length()
+	}
+}
