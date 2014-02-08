@@ -1,5 +1,6 @@
 .DS_Store
 VERSION
+src/main/java/org/anc/lapps/dsl/Version.java
 *.class
 
 # Package Files #

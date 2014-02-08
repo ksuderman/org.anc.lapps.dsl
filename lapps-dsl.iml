@@ -19,16 +19,13 @@
     <orderEntry type="library" name="Maven: org.lappsgrid:api:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:core:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:discriminator:1.2.1" level="project" />
-    <orderEntry type="library" name="Maven: org.anc.lapps.masc:masc-datasource:war:1.2.0-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="org.anc.lapps.serialization" />
-    <orderEntry type="library" name="Maven: org.lappsgrid:client:1.0.2-SNAPSHOT" level="project" />
-    <orderEntry type="module" module-name="simple-soap-client" />
-    <orderEntry type="library" name="Maven: org.lappsgrid:service-grid-libs:1.1.0" level="project" />
-    <orderEntry type="module" module-name="pipeline" />
+    <orderEntry type="library" name="Maven: org.lappsgrid:client:1.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.anc.lapps:pipeline:1.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.6" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.0.6" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.0.6" level="project" />
-    <orderEntry type="library" name="Maven: org.anc:common:3.1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.anc:common:3.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.anc:xml:2.1.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />

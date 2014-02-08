@@ -30,7 +30,9 @@ class LappsDsl {
         def packages = [
             'org.lappsgrid.api',
             'org.lappsgrid.core',
-            'org.lappsgrid.client',
+            //'org.lappsgrid.client',
+            'org.lappsgrid.client.datasource',
+            'org.lappsgrid.client.service',
             'org.lappsgrid.discriminator',
             //'org.anc.grid.masc.data.client',
             //'org.anc.lapps.client',
@@ -59,7 +61,21 @@ class LappsDsl {
 
         println "Running main."
         script.metaClass = getMetaClass(script.class, shell)
-        script.run()
+        try {
+            script.run()
+        }
+        catch (Exception e) {
+            println()
+            println "Script execution threw an exception:"
+            println e.message
+            e.stackTrace.each { StackTraceElement trace ->
+                //println "${trace.fileName} ${trace.methodName} ${trace.lineNumber} : ${trace.toString()}"
+                if (trace.fileName && trace.fileName.startsWith('Script') && trace.methodName == 'run') {
+                    println "\t${trace.toString()}"
+                }
+            }
+            println()
+        }
     }
 
     MetaClass getMetaClass(Class<?> theClass, GroovyShell shell) {
