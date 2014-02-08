@@ -30,7 +30,9 @@ class LappsDsl {
         def packages = [
             'org.lappsgrid.api',
             'org.lappsgrid.core',
-            'org.lappsgrid.client',
+            //'org.lappsgrid.client',
+            'org.lappsgrid.client.datasource',
+            'org.lappsgrid.client.service',
             'org.lappsgrid.discriminator',
             //'org.anc.grid.masc.data.client',
             //'org.anc.lapps.client',
