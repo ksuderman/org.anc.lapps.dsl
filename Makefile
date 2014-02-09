@@ -1,3 +1,5 @@
+VERSION=$(shell cat VERSION)
+
 help:
 	@echo
 	@echo "Available goals are:"
@@ -15,7 +17,9 @@ clean:
 	mvn clean
 	
 install:
-	cp target/lapps.jar $(HOME)/bin
+	cp target/lapps-$(VERSION).jar $(HOME)/bin
+	cat src/test/resources/lapps | sed 's/__VERSION__/$(VERSION)/' > $(HOME)/bin/lapps
 	
+debug:
+	@echo "Current version is $(VERSION)"
 
-	
