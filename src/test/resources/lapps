@@ -1,0 +1,8 @@
+#!/bin/bash
+set -eu
+
+VERSION=__VERSION__
+HEAP_SIZE=-Xmx4G
+
+java $HEAP_SIZE -jar $HOME/bin/lapps-$VERSION.jar $@
+

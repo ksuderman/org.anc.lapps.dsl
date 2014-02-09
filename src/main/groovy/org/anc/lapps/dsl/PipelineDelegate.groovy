@@ -1,6 +1,6 @@
 package org.anc.lapps.dsl
 
-import org.lappsgrid.client.service.ServiceClient
+import org.lappsgrid.client.ServiceClient
 import org.anc.lapps.pipeline.Pipeline
 import org.lappsgrid.api.Data
 import org.lappsgrid.api.DataSource
