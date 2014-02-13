@@ -49,10 +49,19 @@ class LappsDsl {
 
         Script script = shell.parse(scriptString)
         if (args != null && args.size() > 0) {
-            script.binding.setVariable("args", args)
+            // Parse any command line arguements into a HashMap that will
+            // be passed in to the user's script.
+            def params = [:]
+            args.each { arg ->
+                String[] parts = arg.split('=')
+                String name = parts[0].startsWith('-') ? parts[0][1..-1] : parts[0]
+                String value = parts.size() > 1 ? parts[1] : Boolean.TRUE
+                params[name] = value
+            }
+            script.binding.setVariable("args", params)
         }
         else {
-            script.binding.setVariable("args", [])
+            script.binding.setVariable("args", [:])
         }
 
         println "Running main."

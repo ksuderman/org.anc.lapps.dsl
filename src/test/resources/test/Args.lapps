@@ -1,2 +1,5 @@
 println "Args are: "
-args.each { println it }
+args.each { key,value ->
+    println "${key}=${value}"
+}
+println "Done."
