@@ -20,11 +20,20 @@
     <orderEntry type="library" name="Maven: org.lappsgrid:core:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:discriminator:1.2.1" level="project" />
     <orderEntry type="module" module-name="org.anc.lapps.serialization" />
+    <orderEntry type="library" name="Maven: com.github.jsonld-java:jsonld-java:0.3" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.6" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.2.5" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.2.4" level="project" />
+    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient-cache:4.2.5" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:client:1.0.3" level="project" />
     <orderEntry type="module" module-name="simple-soap-client" />
     <orderEntry type="library" name="Maven: org.lappsgrid:service-grid-libs:1.1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.anc.lapps:pipeline:1.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.6" level="project" />
+    <orderEntry type="module" module-name="pipeline" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.0.6" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.0.6" level="project" />
     <orderEntry type="library" name="Maven: org.anc:common:3.2.0" level="project" />
