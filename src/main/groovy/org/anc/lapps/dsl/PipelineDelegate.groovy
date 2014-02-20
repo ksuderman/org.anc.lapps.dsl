@@ -15,6 +15,8 @@ class PipelineDelegate {
 //    def services = []
     DataSource datasource
     Pipeline pipeline = new Pipeline()
+    boolean performValidation = false
+    boolean beVerbose = false
     def destination
     def extension
 
@@ -28,10 +30,19 @@ class PipelineDelegate {
         pipeline.add(service)
     }
 
-    boolean validate()
+    void validate()
     {
-        return pipeline.validate()
+        //return pipeline.validate()
+        performValidation = true
 //        return false;
+    }
+
+    void validate(boolean performValidation) {
+        this.performValidation = performValidation
+    }
+
+    void verbose(boolean beVerbose) {
+        this.beVerbose = beVerbose
     }
 
     void extension(String extension) {
@@ -62,7 +73,7 @@ class PipelineDelegate {
             }
             else
             {
-                data = pipeline.execute(data);
+                data = pipeline.execute(data, performValidation);
                 if (data.payload == null) {
                     println "ERROR: data.payload is NULL!"
                     String name = DiscriminatorRegistry.get(data.discriminator);
