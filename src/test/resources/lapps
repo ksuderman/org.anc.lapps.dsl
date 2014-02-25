@@ -5,6 +5,6 @@ VERSION=__VERSION__
 HEAP_SIZE=-Xmx4G
 JAR=$HOME/bin/lapps-$VERSION.jar
 
-CLASSPATH=$JAR:lib/
-java $HEAP_SIZE org.anc.lapps.dsl.LappsDsl  $@
+CLASSPATH=$JAR:./
+java $HEAP_SIZE -cp $CLASSPATH org.anc.lapps.dsl.LappsDsl  $@
 
