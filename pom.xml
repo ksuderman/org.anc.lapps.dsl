@@ -11,12 +11,14 @@
     </parent>
     <groupId>org.anc.lapps</groupId>
     <artifactId>lapps-dsl</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>LAPPS Groovy DSL</name>
     <description>A domain specific language for scripting LAPPS web services.</description>
     <properties>
         <groovy.version>2.1.1</groovy.version>
         <lapps.version>1.0.1</lapps.version>
+        <lapps.core.version>1.0.2</lapps.core.version>
+        <lapps.client.version>1.0.3</lapps.client.version>
     </properties>
     <build>
         <plugins>
@@ -89,32 +91,32 @@
         <dependency>
             <groupId>org.lappsgrid</groupId>
             <artifactId>core</artifactId>
-            <version>${lapps.version}</version>
+            <version>${lapps.core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.lappsgrid</groupId>
             <artifactId>discriminator</artifactId>
-            <version>1.2.1</version>
+            <version>1.2.2</version>
         </dependency>
         <dependency>
             <groupId>org.anc.lapps</groupId>
             <artifactId>serialization</artifactId>
-            <version>0.10.0</version>
+            <version>0.11.0</version>
         </dependency>
         <dependency>
             <groupId>org.lappsgrid</groupId>
             <artifactId>client</artifactId>
-            <version>1.0.3</version>
+            <version>${lapps.client.version}</version>
         </dependency>
         <dependency>
             <groupId>org.anc.lapps</groupId>
             <artifactId>pipeline</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.anc</groupId>
             <artifactId>common</artifactId>
-            <version>3.2.0</version>
+            <version>3.3.0</version>
         </dependency>
         <dependency>
             <groupId>org.anc</groupId>
