@@ -9,8 +9,7 @@ import org.codehaus.groovy.control.customizers.ImportCustomizer
  * @author Keith Suderman
  */
 class LappsDsl {
-//    def servers = [:]
-//    def services = [:]
+    static final String EXTENSION = ".lsd"
 
     Set<String> included = new HashSet<String>()
     File parentDir
@@ -148,7 +147,7 @@ class LappsDsl {
 
             File file = filemaker(filename)
             if (!file.exists()) {
-                file = filemaker(filename + ".lapps")
+                file = filemaker(filename + EXTENSION)
                 if (!file.exists()) {
                     throw new FileNotFoundException(filename)
                 }

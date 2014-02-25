@@ -17,8 +17,8 @@ clean:
 	mvn clean
 	
 install:
-	cp target/lapps-$(VERSION).jar $(HOME)/bin
-	cat src/test/resources/lapps | sed 's/__VERSION__/$(VERSION)/' > $(HOME)/bin/lapps
+	cp target/lsd-$(VERSION).jar $(HOME)/bin
+	cat src/test/resources/lsd | sed 's/__VERSION__/$(VERSION)/' > $(HOME)/bin/lsd
 	
 debug:
 	@echo "Current version is $(VERSION)"

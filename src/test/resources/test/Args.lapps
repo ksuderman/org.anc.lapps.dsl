@@ -1,5 +1,0 @@
-println "Args are: "
-args.each { key,value ->
-    println "${key}=${value}"
-}
-println "Done."
