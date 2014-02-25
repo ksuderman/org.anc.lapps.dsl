@@ -9,8 +9,7 @@ import org.codehaus.groovy.control.customizers.ImportCustomizer
  * @author Keith Suderman
  */
 class LappsDsl {
-//    def servers = [:]
-//    def services = [:]
+    static final String EXTENSION = ".lsd"
 
     Set<String> included = new HashSet<String>()
     File parentDir
@@ -148,7 +147,7 @@ class LappsDsl {
 
             File file = filemaker(filename)
             if (!file.exists()) {
-                file = filemaker(filename + ".lapps")
+                file = filemaker(filename + EXTENSION)
                 if (!file.exists()) {
                     throw new FileNotFoundException(filename)
                 }
@@ -210,7 +209,7 @@ class LappsDsl {
             println """
 USAGE
 
-java -jar lapps-<version>.jar /path/to/script"
+java -jar lsd-${Version.version}.jar /path/to/script"
 
 """
             return
@@ -218,12 +217,12 @@ java -jar lapps-<version>.jar /path/to/script"
 
         if (args[0] == '-version') {
             println()
-            println "LAPPS Groovy DSL v${Version.version}"
+            println "LAPPS Service DSL v${Version.version}"
             println "Copyright 2014 American National Corpus"
             println()
             return
         }
-        else if (args[0] == "-interactive") {
+        else if (args[0] == '-i' || args[0] == "--interactive") {
             new LappsDsl().interactiveMode(args)
         }
         else {
