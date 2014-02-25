@@ -21,22 +21,26 @@ class LappsDsl {
         run(file.text, args)
     }
 
-    void run(String scriptString, args) {
+    ClassLoader getLoader() {
         ClassLoader loader = Thread.currentThread().contextClassLoader;
         if (loader == null) {
             loader = this.class.classLoader
         }
+        return loader
+    }
+
+    CompilerConfiguration getCompilerConfiguration() {
         ImportCustomizer customizer = new ImportCustomizer()
         def packages = [
-            'org.lappsgrid.api',
-            'org.lappsgrid.core',
-            'org.lappsgrid.client',
-            'org.lappsgrid.discriminator',
-            'org.anc.lapps.pipeline',
-            'org.anc.lapps.serialization',
-            'org.anc.io',
-            'org.anc.util',
-            'org.anc.xml'
+                'org.lappsgrid.api',
+                'org.lappsgrid.core',
+                'org.lappsgrid.client',
+                'org.lappsgrid.discriminator',
+                'org.anc.lapps.pipeline',
+                'org.anc.lapps.serialization',
+                'org.anc.io',
+                'org.anc.util',
+                'org.anc.xml'
         ]
         packages.each {
             customizer.addStarImports(it)
@@ -44,7 +48,53 @@ class LappsDsl {
 
         CompilerConfiguration configuration = new CompilerConfiguration()
         configuration.addCompilationCustomizers(customizer)
-//        Binding bindings = new Binding()
+        return configuration
+    }
+
+    void interactiveMode(args) {
+        TextDevice io = TextDevice.create()
+        ClassLoader loader = getLoader()
+        CompilerConfiguration configuration = getCompilerConfiguration()
+        GroovyShell shell = new GroovyShell(loader, bindings, configuration)
+        def params = [:]
+        if (args != null && args.size() > 0) {
+            // Parse any command line arguements into a HashMap that will
+            // be passed in to the user's script.
+            args.each { arg ->
+                String[] parts = arg.split('=')
+                String name = parts[0].startsWith('-') ? parts[0][1..-1] : parts[0]
+                String value = parts.size() > 1 ? parts[1] : Boolean.TRUE
+                params[name] = value
+            }
+        }
+        boolean running = true
+        while (running) {
+            io.printf("> ")
+            String input = io.readLine()
+            if (input == "exit") {
+                running = false
+            }
+            else {
+                Script script = shell.parse(input)
+                script.binding.setVariable("args", params)
+                script.metaClass = getMetaClass(script.class, shell)
+                try {
+                    script.run()
+                }
+                catch (Exception e) {
+                    io.println()
+                    io.println "Script execution threw an exception:"
+                    e.printStackTrace()
+                    io.println()
+                }
+            }
+        }
+        io.println("Good-bye.")
+    }
+
+    void run(String scriptString, args) {
+        ClassLoader loader = getLoader()
+        CompilerConfiguration configuration = getCompilerConfiguration()
         GroovyShell shell = new GroovyShell(loader, bindings, configuration)
 
         Script script = shell.parse(scriptString)
@@ -64,7 +114,7 @@ class LappsDsl {
             script.binding.setVariable("args", [:])
         }
 
-        println "Running main."
+        //println "Running main."
         script.metaClass = getMetaClass(script.class, shell)
         try {
             script.run()
@@ -73,13 +123,6 @@ class LappsDsl {
             println()
             println "Script execution threw an exception:"
             e.printStackTrace()
-//            println e.message
-//            e.stackTrace.each { StackTraceElement trace ->
-//                //println "${trace.fileName} ${trace.methodName} ${trace.lineNumber} : ${trace.toString()}"
-//                if (trace.fileName && trace.fileName.startsWith('Script') && trace.methodName == 'run') {
-//                    println "\t${trace.toString()}"
-//                }
-//            }
             println()
         }
     }
@@ -180,11 +223,16 @@ java -jar lapps-<version>.jar /path/to/script"
             println()
             return
         }
-        def argv = null
-        if (args.size() > 1) {
-            argv = args[1..-1]
+        else if (args[0] == "-interactive") {
+            new LappsDsl().interactiveMode(args)
         }
-        new LappsDsl().run(new File(args[0]), argv)
+        else {
+            def argv = null
+            if (args.size() > 1) {
+                argv = args[1..-1]
+            }
+            new LappsDsl().run(new File(args[0]), argv)
+        }
     }
 }
 
