@@ -146,7 +146,7 @@ class LappsDsl {
             }
 
             File file = filemaker(filename)
-            if (!file.exists()) {
+            if (!file.exists() || file.isDirectory()) {
                 file = filemaker(filename + EXTENSION)
                 if (!file.exists()) {
                     throw new FileNotFoundException(filename)

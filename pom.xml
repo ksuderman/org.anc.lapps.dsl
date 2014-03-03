@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.anc.lapps</groupId>
     <artifactId>lapps-dsl</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1-SNAPSHOT</version>
     <name>LAPPS Services DSL</name>
     <description>A domain specific language for scripting LAPPS web services.</description>
     <properties>
