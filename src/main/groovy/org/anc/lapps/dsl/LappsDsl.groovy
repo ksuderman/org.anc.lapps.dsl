@@ -35,8 +35,8 @@ class LappsDsl {
                 'org.lappsgrid.core',
                 'org.lappsgrid.client',
                 'org.lappsgrid.discriminator',
+                'org.lappsgrid.serialization',
                 'org.anc.lapps.pipeline',
-                'org.anc.lapps.serialization',
                 'org.anc.io',
                 'org.anc.util',
                 'org.anc.xml'

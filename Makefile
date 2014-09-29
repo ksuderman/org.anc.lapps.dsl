@@ -8,6 +8,7 @@ help:
 	@echo "    clean : Clean removes all artifacts from previous builds"
 	@echo "      jar : Creates the lapps.jar file."
 	@echo "  install : Copies the jar to the user's bin directory."
+	@echo "  release : Zips executables and uploads to the ANC web server."
 	@echo "     help : Displays this help message."
 	@echo
 	
