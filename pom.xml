@@ -19,7 +19,7 @@
         <lapps.version>2.0.0-SNAPSHOT</lapps.version>
         <lapps.core.version>2.0.0-SNAPSHOT</lapps.core.version>
         <lapps.client.version>2.0.0-SNAPSHOT</lapps.client.version>
-        <lapps.serialization.version>1.0.0-SNAPSHOT</lapps.serialization.version>
+        <lapps.serialization.version>2.0.0-SNAPSHOT</lapps.serialization.version>
         <lapps.discriminator.version>2.0.0-SNAPSHOT</lapps.discriminator.version>
         <vocabulary.version>1.0.0-SNAPSHOT</vocabulary.version>
         <pipeline.version>1.1.1</pipeline.version>
