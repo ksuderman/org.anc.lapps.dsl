@@ -22,6 +22,7 @@
         <lapps.serialization.version>2.0.0-SNAPSHOT</lapps.serialization.version>
         <lapps.discriminator.version>2.0.1</lapps.discriminator.version>
         <!-- <vocabulary.version>1.0.0-SNAPSHOT</vocabulary.version> -->
+        <validator.version>1.0.1</validator.version>
         <pipeline.version>1.1.1</pipeline.version>
         <anc.commons.version>3.5.0</anc.commons.version>
         <anc.xml.version>2.1.1</anc.xml.version>
@@ -122,6 +123,11 @@
             <version>1.0.0</version>
         </dependency>
         <dependency>
+            <groupId>org.anc.json</groupId>
+            <artifactId>validator</artifactId>
+            <version>${validator.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.anc.lapps</groupId>
             <artifactId>pipeline</artifactId>
             <version>${pipeline.version}</version>
@@ -131,10 +137,12 @@
             <artifactId>common</artifactId>
             <version>${anc.commons.version}</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.anc</groupId>
             <artifactId>xml</artifactId>
             <version>${anc.xml.version}</version>
         </dependency>
+        -->
     </dependencies>
 </project>
