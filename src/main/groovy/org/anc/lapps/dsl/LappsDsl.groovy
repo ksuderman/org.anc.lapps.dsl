@@ -36,10 +36,14 @@ class LappsDsl {
                 'org.lappsgrid.client',
                 'org.lappsgrid.discriminator',
                 'org.lappsgrid.serialization',
+                'org.lappsgrid.serialization.lif',
+                'org.lappsgrid.serialization.datasource',
+                'org.lappsgrid.metadata',
+
                 'org.anc.lapps.pipeline',
                 'org.anc.io',
                 'org.anc.util',
-                'org.anc.xml'
+                'org.anc.json.validator'
         ]
         packages.each {
             customizer.addStarImports(it)
