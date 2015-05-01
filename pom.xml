@@ -7,18 +7,25 @@
     <parent>
         <groupId>org.anc.maven</groupId>
         <artifactId>groovy-parent-pom</artifactId>
-        <version>1.0.0</version>
+        <version>1.1.0</version>
     </parent>
     <groupId>org.anc.lapps</groupId>
     <artifactId>lapps-dsl</artifactId>
-    <version>1.2.1</version>
+    <version>2.1.0</version>
     <name>LAPPS Services DSL</name>
     <description>A domain specific language for scripting LAPPS web services.</description>
     <properties>
-        <groovy.version>2.1.1</groovy.version>
-        <lapps.version>1.0.1</lapps.version>
-        <lapps.core.version>1.1.0</lapps.core.version>
-        <lapps.client.version>1.0.4</lapps.client.version>
+        <groovy.version>2.2.0</groovy.version>
+        <lapps.api.version>2.0.0</lapps.api.version>
+        <lapps.core.version>2.0.0</lapps.core.version>
+        <lapps.client.version>2.0.0</lapps.client.version>
+        <lapps.serialization.version>2.0.0</lapps.serialization.version>
+        <lapps.discriminator.version>2.0.1</lapps.discriminator.version>
+        <!-- <vocabulary.version>1.0.0-SNAPSHOT</vocabulary.version> -->
+        <validator.version>1.0.1</validator.version>
+        <pipeline.version>1.1.1</pipeline.version>
+        <anc.commons.version>3.5.0</anc.commons.version>
+        <anc.xml.version>2.1.1</anc.xml.version>
     </properties>
     <build>
         <plugins>
@@ -86,22 +93,24 @@
         <dependency>
             <groupId>org.lappsgrid</groupId>
             <artifactId>api</artifactId>
-            <version>${lapps.version}</version>
+            <version>${lapps.api.version}</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.lappsgrid</groupId>
             <artifactId>core</artifactId>
             <version>${lapps.core.version}</version>
         </dependency>
+        -->
         <dependency>
             <groupId>org.lappsgrid</groupId>
             <artifactId>discriminator</artifactId>
-            <version>1.2.2</version>
+            <version>${lapps.discriminator.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.anc.lapps</groupId>
+            <groupId>org.lappsgrid</groupId>
             <artifactId>serialization</artifactId>
-            <version>0.12.1</version>
+            <version>${lapps.serialization.version}</version>
         </dependency>
         <dependency>
             <groupId>org.lappsgrid</groupId>
@@ -109,19 +118,31 @@
             <version>${lapps.client.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.lappsgrid.experimental</groupId>
+            <artifactId>metadata</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.anc.json</groupId>
+            <artifactId>validator</artifactId>
+            <version>${validator.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.anc.lapps</groupId>
             <artifactId>pipeline</artifactId>
-            <version>1.1.0</version>
+            <version>${pipeline.version}</version>
         </dependency>
         <dependency>
             <groupId>org.anc</groupId>
             <artifactId>common</artifactId>
-            <version>3.4.0</version>
+            <version>${anc.commons.version}</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.anc</groupId>
             <artifactId>xml</artifactId>
-            <version>2.1.1</version>
+            <version>${anc.xml.version}</version>
         </dependency>
+        -->
     </dependencies>
 </project>

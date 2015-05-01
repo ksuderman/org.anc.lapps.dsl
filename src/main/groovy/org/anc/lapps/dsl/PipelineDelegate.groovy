@@ -2,11 +2,14 @@ package org.anc.lapps.dsl
 
 import org.lappsgrid.client.ServiceClient
 import org.anc.lapps.pipeline.Pipeline
-import org.lappsgrid.api.Data
 import org.lappsgrid.api.DataSource
 import org.lappsgrid.core.DataFactory
-import org.lappsgrid.discriminator.DiscriminatorRegistry
-import org.lappsgrid.discriminator.Types
+import org.lappsgrid.serialization.Data
+import org.lappsgrid.serialization.Serializer
+
+//import org.lappsgrid.discriminator.DiscriminatorRegistry
+import static org.lappsgrid.discriminator.Discriminators.Uri
+
 
 /**
  * @author Keith Suderman
@@ -59,16 +62,32 @@ class PipelineDelegate {
                 return
             }
         }
-        Data listData = datasource.query(DataFactory.list());
-        if (listData.discriminator == Types.ERROR) {
+        String json = datasource.execute(DataFactory.list());
+        Data listData = Serializer.parse(json, Data);
+        if (listData.discriminator == Uri.ERROR) {
             println "Datasource.list() returned an error:"
             println listData.getPayload()
             return
         }
-        String[] keys = listData.payload.split("\\s+")
+        Object payload = listData.payload
+        if (payload == null) {
+            println "DataSource returned a null payload"
+            return
+        }
+        List<String> keys;
+        if (payload instanceof List) {
+            keys = (List<String>) payload
+        }
+        else if (payload instanceof String) {
+            keys = Serializer.parse(payload.toString(), List)
+        }
+        else {
+            println "Unknown payload type: ${payload.class.name}"
+        }
+//        String[] keys = listData.payload.split("\\s+")
         keys.each { key ->
-            Data data = datasource.query(DataFactory.get(key))
-            if (data.discriminator == Types.ERROR) {
+            Data data = datasource.execute(DataFactory.get(key))
+            if (data.discriminator == Uri.ERROR) {
                 println "Unable to fetch ${key}: ${data.payload}"
             }
             else
@@ -76,10 +95,9 @@ class PipelineDelegate {
                 data = pipeline.execute(data, performValidation);
                 if (data.payload == null) {
                     println "ERROR: data.payload is NULL!"
-                    String name = DiscriminatorRegistry.get(data.discriminator);
-                    println "Return type is ${name} (${data.discriminator})"
+                    println "Return type is ${data.discriminator}"
                 }
-                else if (data.discriminator == Types.ERROR) {
+                else if (data.discriminator == Uri.ERROR) {
                     println "ERROR: ${data.payload}"
                 }
                 else {
