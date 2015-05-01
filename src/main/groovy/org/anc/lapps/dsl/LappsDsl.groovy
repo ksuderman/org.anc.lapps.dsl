@@ -104,12 +104,20 @@ class LappsDsl {
         if (args != null && args.size() > 0) {
             // Parse any command line arguements into a HashMap that will
             // be passed in to the user's script.
+            int index = 0;
             def params = [:]
             args.each { arg ->
                 String[] parts = arg.split('=')
                 String name = parts[0].startsWith('-') ? parts[0][1..-1] : parts[0]
-                String value = parts.size() > 1 ? parts[1] : Boolean.TRUE
-                params[name] = value
+                //String value = parts.size() > 1 ? parts[1] : Boolean.TRUE
+                //params[name] = value
+                if (parts.size() > 1) {
+                    params[name] = parts[1]
+                }
+                else {
+                    params[index] = name
+                    ++index
+                }
             }
             script.binding.setVariable("args", params)
         }

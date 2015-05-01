@@ -21,11 +21,11 @@
     <orderEntry type="library" name="Maven: org.apache.ivy:ivy:2.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:api:2.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:discriminator:2.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.lappsgrid:serialization:2.0.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.lappsgrid:serialization:2.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.3.0" level="project" />
-    <orderEntry type="library" name="Maven: org.lappsgrid:client:2.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: org.lappsgrid:core:2.0.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.lappsgrid:client:2.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.lappsgrid:core:2.0.0" level="project" />
     <orderEntry type="library" name="Maven: net.servicegrid:jp.go.nict.langrid.client:1.0.2" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.9" level="project" />
     <orderEntry type="library" name="Maven: net.servicegrid:jp.go.nict.langrid.client.soap:1.0.2" level="project" />
