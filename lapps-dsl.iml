@@ -29,7 +29,6 @@
     <orderEntry type="library" name="Maven: net.servicegrid:jp.go.nict.langrid.client:1.0.2" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.9" level="project" />
     <orderEntry type="library" name="Maven: net.servicegrid:jp.go.nict.langrid.client.soap:1.0.2" level="project" />
-    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.4" level="project" />
     <orderEntry type="library" name="Maven: com.floreysoft:jmte:3.1.1" level="project" />
     <orderEntry type="library" name="Maven: asm:asm:3.3.1" level="project" />
     <orderEntry type="library" name="Maven: net.servicegrid:jp.go.nict.langrid.servicecontainer:1.0.2" level="project" />
@@ -76,6 +75,11 @@
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.0.11" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.0.11" level="project" />
     <orderEntry type="library" name="Maven: org.anc:common:3.5.0" level="project" />
+    <orderEntry type="library" name="Maven: org.anc.json:transform:1.0.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: net.servicegrid:jp.go.nict.langrid.service.language_1_2:1.0.5" level="project" />
+    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.4" level="project" />
+    <orderEntry type="library" name="Maven: net.servicegrid:jp.go.nict.langrid.language:1.0.5" level="project" />
+    <orderEntry type="library" name="Maven: net.servicegrid:jp.go.nict.langrid.service.common_1_2:1.0.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
   </component>

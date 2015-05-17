@@ -43,7 +43,8 @@ class LappsDsl {
                 'org.anc.lapps.pipeline',
                 'org.anc.io',
                 'org.anc.util',
-                'org.anc.json.validator'
+                'org.anc.json.validator',
+                'org.anc.json.transform'
         ]
         packages.each {
             customizer.addStarImports(it)
