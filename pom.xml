@@ -1,50 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE project [
-        <!ELEMENT project (modelVersion|parent|groupId|artifactId|version|name|description|properties|build|dependencies)*>
-        <!ATTLIST project
-                xmlns CDATA #REQUIRED
-                xmlns:xsi CDATA #REQUIRED
-                xsi:schemaLocation CDATA #REQUIRED>
-        <!ELEMENT modelVersion (#PCDATA)>
-        <!ELEMENT parent (groupId|artifactId|version)*>
-        <!ELEMENT groupId (#PCDATA)>
-        <!ELEMENT artifactId (#PCDATA)>
-        <!ELEMENT version (#PCDATA)>
-        <!ELEMENT name (#PCDATA)>
-        <!ELEMENT description (#PCDATA)>
-        <!ELEMENT properties (groovy.version|lapps.api.version|lapps.core.version|lapps.client.version|lapps.serialization.version|lapps.discriminator.version|validator.version|pipeline.version|anc.commons.version|anc.xml.version|json.transform.version)*>
-        <!ELEMENT groovy.version (#PCDATA)>
-        <!ELEMENT lapps.api.version (#PCDATA)>
-        <!ELEMENT lapps.core.version (#PCDATA)>
-        <!ELEMENT lapps.client.version (#PCDATA)>
-        <!ELEMENT lapps.serialization.version (#PCDATA)>
-        <!ELEMENT lapps.discriminator.version (#PCDATA)>
-        <!ELEMENT validator.version (#PCDATA)>
-        <!ELEMENT pipeline.version (#PCDATA)>
-        <!ELEMENT anc.commons.version (#PCDATA)>
-        <!ELEMENT anc.xml.version (#PCDATA)>
-        <!ELEMENT json.transform.version (#PCDATA)>
-        <!ELEMENT build (plugins)*>
-        <!ELEMENT plugins (plugin)*>
-        <!ELEMENT plugin (groupId|artifactId|configuration|executions|version)*>
-        <!ELEMENT configuration (package|finalName|descriptorRefs|appendAssemblyId|archive)*>
-        <!ELEMENT package (#PCDATA)>
-        <!ELEMENT executions (execution)*>
-        <!ELEMENT execution (id|phase|goals)*>
-        <!ELEMENT id (#PCDATA)>
-        <!ELEMENT phase (#PCDATA)>
-        <!ELEMENT goals (goal)*>
-        <!ELEMENT goal (#PCDATA)>
-        <!ELEMENT finalName (#PCDATA)>
-        <!ELEMENT descriptorRefs (descriptorRef)*>
-        <!ELEMENT descriptorRef (#PCDATA)>
-        <!ELEMENT appendAssemblyId (#PCDATA)>
-        <!ELEMENT archive (manifest)*>
-        <!ELEMENT manifest (mainClass)*>
-        <!ELEMENT mainClass (#PCDATA)>
-        <!ELEMENT dependencies (dependency)*>
-        <!ELEMENT dependency (groupId|artifactId|version)*>
-        ]>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -53,7 +7,7 @@
     <parent>
         <groupId>org.anc.maven</groupId>
         <artifactId>groovy-parent-pom</artifactId>
-        <version>1.1.0</version>
+        <version>1.5.0</version>
     </parent>
     <groupId>org.anc.lapps</groupId>
     <artifactId>lapps-dsl</artifactId>
@@ -61,12 +15,16 @@
     <name>LAPPS Services DSL</name>
     <description>A domain specific language for scripting LAPPS web services.</description>
     <properties>
-        <groovy.version>2.2.0</groovy.version>
+        <groovy.version>2.4.3</groovy.version>
+        <ivy.version>2.4.0</ivy.version>
+        <lapps.all.version>2.0.2</lapps.all.version>
+        <!--
         <lapps.api.version>2.0.0</lapps.api.version>
         <lapps.core.version>2.0.0</lapps.core.version>
         <lapps.client.version>2.0.0</lapps.client.version>
         <lapps.serialization.version>2.0.0</lapps.serialization.version>
         <lapps.discriminator.version>2.0.1</lapps.discriminator.version>
+        -->
         <!-- <vocabulary.version>1.0.0-SNAPSHOT</vocabulary.version> -->
         <validator.version>1.0.1</validator.version>
         <pipeline.version>1.1.1</pipeline.version>
@@ -135,12 +93,12 @@
         <dependency>
             <groupId>org.apache.ivy</groupId>
             <artifactId>ivy</artifactId>
-            <version>2.2.0</version>
+            <version>${ivy.version}</version>
         </dependency>
         <dependency>
             <groupId>org.lappsgrid</groupId>
-            <artifactId>api</artifactId>
-            <version>${lapps.api.version}</version>
+            <artifactId>all</artifactId>
+            <version>${lapps.all.version}</version>
         </dependency>
         <!--
         <dependency>
@@ -148,7 +106,6 @@
             <artifactId>core</artifactId>
             <version>${lapps.core.version}</version>
         </dependency>
-        -->
         <dependency>
             <groupId>org.lappsgrid</groupId>
             <artifactId>discriminator</artifactId>
@@ -169,6 +126,8 @@
             <artifactId>metadata</artifactId>
             <version>1.0.0</version>
         </dependency>
+        -->
+
         <dependency>
             <groupId>org.anc.json</groupId>
             <artifactId>validator</artifactId>
@@ -189,11 +148,13 @@
             <artifactId>transform</artifactId>
             <version>${json.transform.version}</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>net.servicegrid</groupId>
             <artifactId>jp.go.nict.langrid.service.language_1_2</artifactId>
             <version>1.0.5</version>
         </dependency>
+        -->
         <!--
         <dependency>
             <groupId>org.anc</groupId>
