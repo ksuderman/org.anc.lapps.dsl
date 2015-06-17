@@ -8,5 +8,11 @@ src/main/java/org/anc/lapps/dsl/Version.java
 *.war
 *.ear
 
+# IntelliJ project files.
+*.ipr
+*.iml
+*.iws
+
+# Maven build directory.
 target
 
