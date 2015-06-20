@@ -1,12 +1,15 @@
 .DS_Store
 VERSION
-src/main/java/org/anc/lapps/dsl/Version.java
+Version.java
 *.class
 
-# Package Files #
 *.jar
 *.war
 *.ear
+
+*.ipr
+*.iml
+*.iws
 
 target
 
