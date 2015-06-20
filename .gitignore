@@ -1,18 +1,15 @@
 .DS_Store
 VERSION
-src/main/java/org/anc/lapps/dsl/Version.java
+Version.java
 *.class
 
-# Package Files #
 *.jar
 *.war
 *.ear
 
-# IntelliJ project files.
 *.ipr
 *.iml
 *.iws
 
-# Maven build directory.
 target
 
