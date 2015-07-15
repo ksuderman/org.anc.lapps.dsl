@@ -231,7 +231,7 @@ java -jar lsd-${Version.version}.jar /path/to/script"
         if (args[0] == '-version') {
             println()
             println "LAPPS Service DSL v${Version.version}"
-            println "Copyright 2014 American National Corpus"
+            println "Copyright 2015 The Language Application Grid"
             println()
             return
         }
