@@ -37,7 +37,7 @@ them
 String username = "tester"
 String password = "tester"
 
-String server = "http://vassar.lappsgrid.org/invoker"
+String server = "http://vassar.lappsgrid.org"
 
 String mascUrl = "$server/anc:masc.text_2.0.0"
 String tokenizerUrl = "$server/anc:stanford.tokenizer_2.0.0"
