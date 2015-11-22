@@ -37,7 +37,7 @@ them
 String username = "tester"
 String password = "tester"
 
-String server = "http://vassar.lappsgrid.org"
+String server = "http://vassar.lappsgrid.org/invoker"
 
 String mascUrl = "$server/anc:masc.text_2.0.0"
 String tokenizerUrl = "$server/anc:stanford.tokenizer_2.0.0"
@@ -47,5 +47,12 @@ ServiceClient tokenizer = new ServiceClient(tokenizerUrl, username, password)
 
 String json = masc.get("MASC3-0202")
 json = tokenizer.execute(json)
-println json
+println groovy.json.JsonOutput.prettyPrint(json)
 ```
+
+Writing effective LSD scripts requires some knowledge of the following packages:
+
+ 1. [LAPPS Grid API](https://lapps.github.io/org.lappsgrid.api)
+ 1. [LAPPS Grid Clients](https://lapps.github.io/org.lappsgrid.client)
+ 1. [LAPPS Grid Serialization and I/O)](https://lapps.github.io/org.lappsgrid.serialization)
+ 
