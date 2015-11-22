@@ -1,8 +1,9 @@
 #!/bin/bash
 set -eu
 
+DIR=`dirname $0`
 # Change this to the location where you installed the jar file.
-JAR=$HOME/bin/lsd-__VERSION__.jar
+JAR=$DIR/lsd-__VERSION__.jar
 HEAP_SIZE=-Xmx4G
 
 CLASSPATH=$JAR:./
