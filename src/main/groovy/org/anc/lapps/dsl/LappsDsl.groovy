@@ -49,6 +49,8 @@ class LappsDsl {
         packages.each {
             customizer.addStarImports(it)
         }
+        customizer.addStaticImport('org.lappsgrid.discriminator.Distriminators', 'Uri')
+        customizer.addStaticImport('org.lappsgrid.discriminator.Distriminators', 'Alias')
 
         CompilerConfiguration configuration = new CompilerConfiguration()
         configuration.addCompilationCustomizers(customizer)

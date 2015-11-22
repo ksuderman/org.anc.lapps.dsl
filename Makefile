@@ -1,5 +1,7 @@
 VERSION=$(shell cat VERSION)
 JAR=target/lsd-$(VERSION).jar
+# Where the jar file and startup script will be copied.
+BIN=$(HOME)/bin
 
 help:
 	@echo
@@ -19,9 +21,8 @@ clean:
 	mvn clean
 	
 install:
-	#cp target/lsd-$(VERSION).jar $(HOME)/bin
-	cp $(JAR) $(HOME)/bin
-	cat src/test/resources/lsd | sed 's/__VERSION__/$(VERSION)/' > $(HOME)/bin/lsd
+	cp $(JAR) $(BIN)
+	cat src/test/resources/lsd | sed 's/__VERSION__/$(VERSION)/' > $(BIN)/lsd
 	
 debug:
 	@echo "Current version is $(VERSION)"
