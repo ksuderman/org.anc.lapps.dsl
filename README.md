@@ -26,7 +26,7 @@ where *x.y.z* is the latest version number.
 **NOTE:** It is recommended to give Java a large heap (the *-Xmx4G* option) to 
 prevent out of memory exceptions when processing large documents.
 
-For Windows Users:
+**For Windows Users:**
 
 The lsd.bat file can be run from PowerShell or Command Prompt on Windows machines. 
 
