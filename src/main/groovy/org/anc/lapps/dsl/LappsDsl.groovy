@@ -49,6 +49,8 @@ class LappsDsl {
         packages.each {
             customizer.addStarImports(it)
         }
+        customizer.addStaticImport('org.lappsgrid.discriminator.Distriminators', 'Uri')
+        customizer.addStaticImport('org.lappsgrid.discriminator.Distriminators', 'Alias')
 
         CompilerConfiguration configuration = new CompilerConfiguration()
         configuration.addCompilationCustomizers(customizer)
@@ -231,7 +233,7 @@ java -jar lsd-${Version.version}.jar /path/to/script"
         if (args[0] == '-version') {
             println()
             println "LAPPS Service DSL v${Version.version}"
-            println "Copyright 2014 American National Corpus"
+            println "Copyright 2015 The Language Application Grid"
             println()
             return
         }
