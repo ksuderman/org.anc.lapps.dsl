@@ -50,7 +50,7 @@ class LappsDsl {
             customizer.addStarImports(it)
         }
         customizer.addStaticImport('org.lappsgrid.discriminator.Distriminators', 'Uri')
-        customizer.addStaticImport('org.lappsgrid.discriminator.Distriminators', 'Alias')
+        //customizer.addStaticImport('org.lappsgrid.discriminator.Distriminators', 'Alias')
 
         CompilerConfiguration configuration = new CompilerConfiguration()
         configuration.addCompilationCustomizers(customizer)
@@ -182,7 +182,7 @@ class LappsDsl {
 
         meta.Datasource = { Closure cl ->
             cl.delegate = new DataSourceDelegate()
-            cl.resolveStrategy = Closure.DELEGATE_FIRST
+            cl.resolveStrategy = DELEGATE_FIRST
             cl()
             String url = cl.delegate.getServiceUrl()
             String user = cl.delegate.server.username
@@ -192,14 +192,14 @@ class LappsDsl {
 
         meta.Server = { Closure cl ->
             cl.delegate = new ServerDelegate()
-            cl.resolveStrategy = Closure.DELEGATE_FIRST
+            cl.resolveStrategy = DELEGATE_FIRST
             cl()
             return new Server(cl.delegate)
         }
 
         meta.Service = { Closure cl ->
             cl.delegate = new ServiceDelegate()
-            cl.resolveStrategy = Closure.DELEGATE_FIRST
+            cl.resolveStrategy = DELEGATE_FIRST
             cl()
             def service = new Service(cl.delegate)
             def url = service.getServiceUrl();
@@ -210,7 +210,7 @@ class LappsDsl {
 
         meta.Pipeline = { Closure cl ->
             cl.delegate = new PipelineDelegate()
-            cl.resolveStrategy = Closure.DELEGATE_FIRST
+            cl.resolveStrategy = DELEGATE_FIRST
             cl()
             return cl.delegate
         }
