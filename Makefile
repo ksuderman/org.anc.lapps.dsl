@@ -15,7 +15,7 @@ help:
 	@echo
 	
 jar:
-	mvn package
+	export MAVEN_OPTS="-Xmx512m -Xms128m -Xss2m" && mvn package
 	
 clean:
 	mvn clean
