@@ -11,13 +11,29 @@
     </parent>
     <groupId>org.anc.lapps</groupId>
     <artifactId>lapps-dsl</artifactId>
-    <version>2.2.0</version>
+    <version>2.2.1</version>
     <name>LAPPS Services DSL</name>
     <description>A domain specific language for scripting LAPPS web services.</description>
+    <url>https://github.com/lappsgrid-incubator/org.anc.lapps.dsl</url>
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <scm>
+        <url>https://github.com/lappsgrid-incubator/org.anc.lapps.dsl</url>
+        <connection>scm:git:https://github.com/lappsgrid-incubator/org.anc.lapps.dsl.git</connection>
+        <developerConnection>scm:git:https://github.com/lappsgrid-incubator/org.anc.lapps.dsl.git</developerConnection>
+    </scm>
+    <issueManagement>
+        <url>https://github.com/lappsgrid-incubator/org.anc.lapps.dsl/issues</url>
+        <system>GitHub issues</system>
+    </issueManagement>
     <properties>
         <groovy.version>2.4.3</groovy.version>
         <ivy.version>2.4.0</ivy.version>
-        <lapps.all.version>2.0.2</lapps.all.version>
+        <lapps.all.version>2.3.1</lapps.all.version>
         <!--
         <lapps.api.version>2.0.0</lapps.api.version>
         <lapps.core.version>2.0.0</lapps.core.version>
@@ -74,7 +90,7 @@
                         <descritor>src/main/assembly/assembly.xml</descritor>
                     </descriptors>
                     -->
-                    <appendAssemblyId>false</appendAssemblyId>
+                    <appendAssemblyId>true</appendAssemblyId>
                     <archive>
                         <manifest>
                             <mainClass>org.anc.lapps.dsl.LappsDsl</mainClass>
