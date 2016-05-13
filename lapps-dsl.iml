@@ -19,7 +19,7 @@
     <orderEntry type="library" name="Maven: org.anc.lapps.proc.client:soap-client:1.0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-all:2.4.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ivy:ivy:2.4.0" level="project" />
-    <orderEntry type="library" name="Maven: org.lappsgrid:all:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.lappsgrid:all:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:api:2.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:core:2.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.lappsgrid:client:2.0.3" level="project" />
