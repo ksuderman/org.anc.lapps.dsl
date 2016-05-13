@@ -16,6 +16,7 @@ help:
 	
 jar:
 	export MAVEN_OPTS="-Xmx512m -Xms128m -Xss2m" && mvn package
+	./rename.sh
 	
 clean:
 	mvn clean
@@ -37,5 +38,6 @@ release:
 	scp -P 22022 target/lsd-$(VERSION).tgz suderman@anc.org:/home/www/anc/downloads
 	scp -P 22022 target/lsd-latest.zip suderman@anc.org:/home/www/anc/downloads
 	scp -P 22022 target/lsd-latest.tgz suderman@anc.org:/home/www/anc/downloads
+	scp -P 22022 target/lsd-latest.tgz suderman@anc.org:/home/www/anc/downloads/docker
 	echo "Release complete."
 
