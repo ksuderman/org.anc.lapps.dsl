@@ -11,6 +11,7 @@ help:
 	@echo "      jar : Creates the lapps.jar file."
 	@echo "  install : Copies the jar to the user's bin directory."
 	@echo "  release : Zips executables and uploads to the ANC web server."
+	@echo "      all : Does all of the above."
 	@echo "     help : Displays this help message."
 	@echo
 	
@@ -41,3 +42,4 @@ release:
 	scp -P 22022 target/lsd-latest.tgz suderman@anc.org:/home/www/anc/downloads/docker
 	echo "Release complete."
 
+all: clean jar install release
