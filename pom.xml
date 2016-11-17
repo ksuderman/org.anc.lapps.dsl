@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.anc.lapps</groupId>
     <artifactId>lapps-dsl</artifactId>
-    <version>2.2.3-SNAPSHOT</version>
+    <version>2.2.3</version>
     <name>LAPPS Services DSL</name>
     <description>A domain specific language for scripting LAPPS web services.</description>
     <url>https://github.com/lappsgrid-incubator/org.anc.lapps.dsl</url>
