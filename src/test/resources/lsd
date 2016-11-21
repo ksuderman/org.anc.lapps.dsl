@@ -1,11 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -eu -o pipefail
 
+# __VERSION__ is replaced by sed during the build.
+VERSION=__VERSION__
 
 # Find original directory of bash script, resovling symlinks
 # http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in/246128#246128
 SOURCE="${BASH_SOURCE[0]}"
-echo "Directory is $DIR"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
     DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
     SOURCE="$(readlink "$SOURCE")"
@@ -14,7 +15,7 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 # Change this to the location where you installed the jar file.
-JAR=${DIR}/lsd-__VERSION__.jar
+JAR=${DIR}/lsd-${VERSION}.jar
 HEAP_SIZE=-Xmx4G
 
 CLASSPATH=$JAR:./
