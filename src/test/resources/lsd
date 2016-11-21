@@ -16,9 +16,20 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 # Change this to the location where you installed the jar file.
 JAR=${DIR}/lsd-${VERSION}.jar
-HEAP_SIZE=-Xmx4G
+DEFAULT_OPTS="-Xms512M -Xmx4G"
+OPTS=""
+ARGS=""
+for arg in "$@" ; do
+    case $arg in
+        '-D'*|'-X'*) OPTS="$OPTS $arg" ;;
+        *) ARGS="$ARGS $arg" ;;
+    esac
+done
 
-CLASSPATH=$JAR:./
-java $HEAP_SIZE -cp $CLASSPATH org.anc.lapps.dsl.LappsDsl "$@"
+if [ -z "$OPTS" ] ; then
+    OPTS=$DEFAULT_OPTS
+fi
+
+java "$OPTS" -jar $JAR "$ARGS"
 
 
