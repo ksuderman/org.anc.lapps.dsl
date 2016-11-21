@@ -1,9 +1,20 @@
 #!/bin/bash
-set -eu
+set -eu -o pipefail
 
-DIR=`dirname $0`
+
+# Find original directory of bash script, resovling symlinks
+# http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in/246128#246128
+SOURCE="${BASH_SOURCE[0]}"
+echo "Directory is $DIR"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+    DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+    SOURCE="$(readlink "$SOURCE")"
+    [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
 # Change this to the location where you installed the jar file.
-JAR=$DIR/lsd-__VERSION__.jar
+JAR=${DIR}/lsd-__VERSION__.jar
 HEAP_SIZE=-Xmx4G
 
 CLASSPATH=$JAR:./
