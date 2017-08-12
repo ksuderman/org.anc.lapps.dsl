@@ -38,7 +38,7 @@
         <lapps.core.version>2.0.2</lapps.core.version>
         <lapps.client.version>2.0.3</lapps.client.version>
         <lapps.serialization.version>2.5.0-SNAPSHOT</lapps.serialization.version>
-        <lapps.discriminator.version>2.3.0</lapps.discriminator.version>
+        <lapps.discriminator.version>2.3.2-SNAPSHOT</lapps.discriminator.version>
         <!-- <vocabulary.version>1.0.0-SNAPSHOT</vocabulary.version> -->
         <validator.version>1.1.0</validator.version>
         <pipeline.version>2.0.0</pipeline.version>
