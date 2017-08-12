@@ -37,6 +37,7 @@ release:
 	cd target ; tar -czf lsd-$(VERSION).tgz lsd-$(VERSION).jar lsd ; cp lsd-$(VERSION).tgz lsd-latest.tgz
 	scp -P 22022 target/lsd-$(VERSION).zip suderman@anc.org:/home/www/anc/downloads
 	scp -P 22022 target/lsd-$(VERSION).tgz suderman@anc.org:/home/www/anc/downloads
+	scp -i ~/.ssh/lappsgrid-shared-key.pem target/lsd-$(VERSION).tgz root@downloads.lappsgrid.org:/var/lib/downloads
 	scp -P 22022 target/lsd-latest.zip suderman@anc.org:/home/www/anc/downloads
 	scp -P 22022 target/lsd-latest.tgz suderman@anc.org:/home/www/anc/downloads
 	#scp -P 22022 target/lsd-latest.tgz suderman@anc.org:/home/www/anc/downloads/docker
